@@ -17,7 +17,7 @@ sum text
 ### `Example 1`: MLflow on localhost
 
 <div style="float: left; margin: 40px 7px 50px 0; width:100%;">
-<img align="left" width="300" height="400" src="src/images/example_1_local.png">
+<img align="left" width="400" height="500" src="src/images/example_1_local.png">
 
 <p>This is the code you need to align images to the left: sdfsdfsdfsdfsfdsfsfsfsfd<p>
 
@@ -34,7 +34,7 @@ sum text
 ### `Example 2`: MLflow on localhost with SQLite
 
 <div style="float: left; margin: 40px 7px 50px 0; width:100%;">
-<img align="left" width="300" height="400" src="src/images/example_2_local_sqlite.png">
+<img align="left" width="400" height="500" src="src/images/example_2_local_sqlite.png">
 
 <p>This is the code you need to align images to the left: sdfsdfsdfsdfsfdsfsfsfsfd<p>
 
@@ -54,7 +54,7 @@ sum text
 #### `Docker compose`:  Mlflow remote server + jupyter/noteebok with Mlflow client and sqlite file-store
 
 <div style="float: left; margin: 40px 7px 50px 0; width:100%;">
-<img align="left" width="300" height="400" src="src/images/example_1_local.png">
+<img align="left" width="400" height="500" src="src/images/example_3_tracking_sqlite.png">
 
 <p>This is the code you need to align images to the left: sdfsdfsdfsdfsfdsfsfsfsfd<p>
 
@@ -71,7 +71,7 @@ sum text
 #### `Docker compose`:  Mlflow remote server + jupyter/noteebok with Mlflow client + file-store postgres + artifact-store ftp-server
 
 <div style="float: left; margin: 40px 7px 50px 0; width:100%;">
-<img align="left" width="300" height="400" src="src/images/example_1_local.png">
+<img align="left" width="400" height="500" src="src/images/example_4.png">
 
 <p>This is the code you need to align images to the left: sdfsdfsdfsdfsfdsfsfsfsfd<p>
 
