@@ -1,0 +1,101 @@
+version: '3.7'
+
+services:
+  #JUPYTER MLFLOW CLIENT + CODE
+  notebook:
+    build:
+      context: ./docker/nootebook_ML_client
+    ports:
+      - "8888:8888"
+      - "5000:5000"
+      - "20:21"
+
+    volumes:
+          - ./myapp/:/home/jovyan/app
+    depends_on: 
+      - mlflow
+      - ftpd_server
+    environment: 
+      MLFLOW_TRACKING_URI: 'http://localhost:5000'
+
+      #переменная для sudo в  jupyter не рекомендую ставить
+      GRANT_SUDO: 'yes'
+      # имя текущего юзер внутри тетрадки тоесть jovyan
+      # NB_USER: 'root'
+    # command: mlflow ui -p 5000 --host 0.0.0.0
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - notebook_network
+
+  #REMOTE SERVER
+  mlflow:
+    build: 
+      context: ./docker/mlflow_remote_server
+    container_name: mlflow
+    environment:
+      POSTGRES_PASSWORD: "secret" 
+      POSTGRES_USER: 'admin'
+      # - HOST_IP = localhost
+      # - BACKEND_URI =sqlite:////app/mlruns.db 
+      # - GUNICORN_CMD_ARGS="--bind=0.0.0.0"
+      # - ARTIFACT_ROOT = ftp://mlflow:mlflow_password@localhost/data
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./myapp/mlruns:/home/jovyan/app/mlruns
+    depends_on:
+      - postgres
+    networks:
+      - notebook_network
+
+
+
+  #FTP SERVER собираю из образа без Dockerfile
+  ftpd_server:
+    image: stilliard/pure-ftpd:latest
+    container_name: ftpd_server
+    environment:
+      - FTP_USER_NAME=mlflow
+      - FTP_USER_PASS=mlflow_password
+      - FTP_USER_HOME=/home/ftpusers/mlflow
+      - PUBLICHOST=localhost
+      - MLFLOW_TRACKING_URI = 'http://mlflow:5000'
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      # - ./jupyter-notebook-docker/project/ftp:/home/ftpusers\
+      - ./docker/ftp_artifact_store/:/home/ftpusers
+    networks:
+      - notebook_network
+
+
+
+  postgres:
+    user: postgres
+    build:
+      context: ./docker/postgresql_backend_store
+
+    restart: always
+
+    environment:
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'secret'
+      PGHOST: 'postgres'
+      PGDATA: '/var/lib/postgresql/data'
+      POSTGRES_DB: 'mlflow'
+
+    ports: 
+      - "5432:5432"
+    volumes:
+      - ./myapp/voluem_store:/var/lib/postgresql/data
+    networks:
+      - notebook_network
+    
+
+
+
+networks:
+  notebook_network:
+    name: notebook_network

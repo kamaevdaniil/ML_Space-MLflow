@@ -1,0 +1,39 @@
+Local mlflow ui
+
+
+Проверить что в коде написано в set_tracking(localhost) иначе работать не будет
+
+Обязательно указываем порт и host
+mlflow ui -p 5000 --host 0.0.0.0 
+
+Для подключение локально с бд хранилищем 
+mlflow ui -p 5000 --host 0.0.0.0  --backend-store-uri sqlite:///mlruns.db
+
+mlflow ui -p 5000 --host 0.0.0.0  --backend-store-uri file:///mlruns
+
+
+
+1)Локальный запуск клиента с file-store
+-- в Dockerfile User jovyan чтоб небыло permisseon denied 
+-- в докер компосе  enviroment GRANT_SUDO: 'yes' даёт право на суперпользователя
+mlflow ui -p 5000 --host 0.0.0.0  --backend-store-uri file:///home/jovyan/app/mlruns
+
+2)Для подключение локально с бд хранилищем 
+mlflow ui -p 5000 --host 0.0.0.0  --backend-store-uri sqlite:///mlruns.db
+
+3)
+UID = 1000 GID = 10 
+jovyan:x:1000:100::/home/jovyan:/bin/bash
+
+4)Для подключения локально с удалённым сервером, хранилище прогонов sqlite на стороне клиентов
+mlflow ui -p 5000 --host 0.0.0.0 --backend-store-uri sqlite:///home/jovyan/app/db/mlruns.db
+
+5)бд postgres ftp сервер 
+mlflow ui -p 5000 --host 0.0.0.0     --backend-store-uri postgresql://admin:secret@postgres:5432/mlflow --default-artifact-root ftp://mlflow:mlflow_password@ftpd_server/data  
+
+
+docker compose -f docker-compose-test.yml up  --build 
+docker run -e POSTGRES_PASSWORD=secret --rm mlflow_4_remote_server-postgres
+
+
+mlflow ui -p 5000 --host 0.0.0.0     --backend-store-uri postgresql://admin:secret@postgres:5432/mlflow --default-artifact-root ftp://mlflow:mlflow_password@localhost/data 

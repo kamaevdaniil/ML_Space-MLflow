@@ -1,0 +1,1 @@
+postgresql://admin:secret@postgres:5432/mlflow  ftp://mlflow:mlflow_password@localhost/data/0/b4f9e5e3b60d4288852008f1f8e3a474/artifacts
