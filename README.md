@@ -66,7 +66,16 @@
 
 ### `Example 3`: MLflow on localhost with TrackingServer 
 
-#### `Docker compose`:  Mlflow remote server + jupyter/noteebok with Mlflow client and sqlite file-store
+#### `Docker compose`:  Mlflow remote server with + jupyter/noteebok with Mlflow client and 
+
+В данном примере понадобиться:
+
+- docker compose ,c двумя сервисами:
+    - образ ()jupyter notebook
+
+
+
+
 
 
 

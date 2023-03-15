@@ -3,39 +3,50 @@ version: '3.7'
 services:
   #JUPYTER MLFLOW CLIENT + CODE
   notebook:
+    env_file:
+    - notebook_remote.env
     build:
       context: ./docker/nootebook_ML_client
-    ports:
-      - "8888:8888"
-      - "5000:5000"
-    volumes:
-          - ./myapp/:/home/jovyan/app
-    depends_on: 
-      - mlflow
-      # - ftpd_server
+      
     environment: 
-      MLFLOW_TRACKING_URI: 'http://localhost:5000'
+      MLFLOW_TRACKING_URI: ${MLFLOW_TRACKING_URI}
 
       #переменная для sudo в  jupyter не рекомендую ставить
       GRANT_SUDO: 'yes'
       # имя текущего юзер внутри тетрадки тоесть jovyan
       # NB_USER: 'root'
-    # command: mlflow ui -p 5000 --host 0.0.0.0
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    # networks:
-    #   - notebook_network
+      # command: mlflow ui -p 5000 --host 0.0.0.0
+      extra_hosts: "host.docker.internal:host-gateway"
+      # networks:
+      #   - notebook_network
+    ports:
+      - ${JN_PORT}
+      - ${JN_ML_PORT}
+    volumes:
+          - ./myapp/:/home/jovyan/app
+
+    depends_on: 
+      - mlflow
+
+ 
 
   #REMOTE SERVER
   mlflow:
     build: 
       context: ./docker/mlflow_remote_server
+
+      args:
+        MLFLOW_SERVER_FILE: "file:///home/jovyan/app/mlruns"
+        UNAME: jovyan
+        UID: 1000
+        GID: 100      
+
     container_name: mlflow
-    environment:
-      # - HOST_IP = localhost
-      # - BACKEND_URI =sqlite:////app/mlruns.db 
-      # - GUNICORN_CMD_ARGS="--bind=0.0.0.0"
-      - ARTIFACT_ROOT = ftp://mlflow:mlflow_password@localhost/data
+    # environment:
+    #   # - HOST_IP = localhost
+    #   # - BACKEND_URI =sqlite:////app/mlruns.db 
+    #   # - GUNICORN_CMD_ARGS="--bind=0.0.0.0"
+    #   - ARTIFACT_ROOT = ftp://mlflow:mlflow_password@localhost/data
     ports:
       - "5001:5000"
     volumes:

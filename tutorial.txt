@@ -37,3 +37,11 @@ docker run -e POSTGRES_PASSWORD=secret --rm mlflow_4_remote_server-postgres
 
 
 mlflow ui -p 5000 --host 0.0.0.0     --backend-store-uri postgresql://admin:secret@postgres:5432/mlflow --default-artifact-root ftp://mlflow:mlflow_password@localhost/data 
+
+
+
+lsof -i:5000 
+
+kill $(lsof -t -i:5000)
+
+docker compose --env-file notebook_remote.env up --build для запуска 3 примера
