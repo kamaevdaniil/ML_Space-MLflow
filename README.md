@@ -46,7 +46,10 @@
 
 ### `Example 2`: MLflow on localhost with SQLite
 
+Для запуска **MlflowClient** на **localhost c sqlite хранилищем**:
+mlflow ui -p 5000 --host 0.0.0.0  --backend-store-uri sqlite:///mlruns.db
 
+**Пример для запуска**: `/myapp/sample_2_local_sqlite.ipynb`
 
 ![Local_ex_2!](src/images/example_2_local_sqlite.PNG "Local_ex_2")
 
