@@ -3,8 +3,20 @@ docker/ftp_artifact_store/mlflow/data/**
 
 !docker/ftp_artifact_store/mlflow/data/.gitkeep
 
-#игнорируем файл sqlite прогоны
-myapp/db/**
+#игнорируем файл 
+myapp/.ipynb_checkpoints
+
+myapp/db/.ipynb_checkpoints
+
+myapp/db/local_db/.ipynb_checkpoints
+
+myapp/outputs2/.ipynb_checkpoints
+
+#игнорируем  файл бд postgres 
+myapp/voluem_store/**
+
+#отмена игнора остального )
+!myapp/
 
 #игнорируем прогоны 
 myapp/mlruns/**
