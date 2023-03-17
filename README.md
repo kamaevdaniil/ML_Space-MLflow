@@ -79,15 +79,15 @@
 
     - файл  `notebook_remote.env` с переменными среды для сборки
 
-- **Пример** `myapp/sample3_remote_server.ipynb`
+- #### Пример `myapp/sample3_remote_server.ipynb`
 
-- Команда для запуска удалённого сервера Mlflow
+- Команда для запуска удалённого сервера **Mlflow**
   в качестве **бд** `sqlite`, для записи прогонов,
   в качестве хранилища артефактов **URI** до папки `/mlruns `
-> CMD mlflow server \
+> **CMD mlflow server \
     --backend-store-uri sqlite:///mydb.sqlite \\
     --default-artifact-root file:///home/jovyan/app/mlruns \\
-    --host 0.0.0.0 
+    --host 0.0.0.0**
 
 
 
