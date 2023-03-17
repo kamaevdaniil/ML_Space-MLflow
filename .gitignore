@@ -15,17 +15,8 @@ myapp/outputs2/.ipynb_checkpoints
 #игнорируем  файл бд postgres 
 myapp/voluem_store/**
 
+myapp/mlruns/**
+
 #отмена игнора остального )
 !myapp/
 
-#игнорируем прогоны 
-myapp/mlruns/**
-
-#игнорируем  файл бд postgres 
-myapp/voluem_store/**
-
-#хрень
-myapp/.ipynb_checkpoints/**
-
-#хрень
-myapp/outputs2/.ipynb_checkpoints/**
