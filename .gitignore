@@ -1,0 +1,19 @@
+#игорируем артифакты в подпапке
+docker/ftp_artifact_store/mlflow/data/**
+
+!docker/ftp_artifact_store/mlflow/
+
+#игнорируем файл sqlite прогоны
+myapp/db/**
+
+#игнорируем прогоны 
+myapp/mlruns/**
+
+#игнорируем  файл бд postgres 
+myapp/voluem_store/**
+
+#хрень
+myapp/.ipynb_checkpoints/**
+
+#хрень
+myapp/outputs2/.ipynb_checkpoints/**
