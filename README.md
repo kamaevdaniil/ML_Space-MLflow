@@ -75,7 +75,7 @@
 
     - Второй сервис: образ **[python:3.9.13-slim](https://hub.docker.com/r/jupyter/scipy-notebook)**
 
-- для развёртывания примера собрать и поднять контейнеры следующей коммандой: `docker compose --env-file notebook_remote.env up --build`
+- #### для развёртывания примера собрать и поднять контейнеры следующей коммандой: `docker compose --env-file notebook_remote.env up --build`
 
     - файл  `notebook_remote.env` с переменными среды для сборки
 
