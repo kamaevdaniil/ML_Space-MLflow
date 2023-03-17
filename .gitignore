@@ -20,3 +20,8 @@ myapp/mlruns/**
 #отмена игнора остального )
 !myapp/
 
+!myapp/mlruns/.gitkeep
+
+!myapp/voluem_store/.gitkeep
+
+
