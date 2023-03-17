@@ -64,15 +64,30 @@
 
 
 
-### `Example 3`: MLflow on localhost with TrackingServer 
+### `Example 3`: MLflow on Docker with TrackingServer 
 
-#### `Docker compose`:  Mlflow remote server with + jupyter/noteebok with Mlflow client and 
+#### `Docker compose`:  Mlflow remote server with Sqlite + jupyter/noteebok (Mlflow client) 
 
 В данном примере понадобиться:
 
 - docker compose ,c двумя сервисами:
-    - образ ()jupyter notebook
+    - Первый сервис: образ **[jupyter/scipy-notebook](https://hub.docker.com/r/jupyter/scipy-notebook)**
 
+    - Второй сервис: образ **[python:3.9.13-slim](https://hub.docker.com/r/jupyter/scipy-notebook)**
+
+- для развёртывания примера собрать и поднять контейнеры следующей коммандой: `docker compose --env-file notebook_remote.env up --build`
+
+    - файл  `notebook_remote.env` с переменными среды для сборки
+
+- **Пример** `myapp/sample3_remote_server.ipynb`
+
+- Команда для запуска удалённого сервера Mlflow
+  в качестве **бд** `sqlite`, для записи прогонов,
+  в качестве хранилища артефактов **URI** до папки `/mlruns `
+> CMD mlflow server \
+    --backend-store-uri sqlite:///mydb.sqlite \ 
+    --default-artifact-root file:///home/jovyan/app/mlruns\
+    --host 0.0.0.0 
 
 
 
