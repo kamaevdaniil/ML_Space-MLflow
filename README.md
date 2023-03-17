@@ -71,11 +71,12 @@
 В данном примере понадобиться:
 
 - docker compose ,c двумя сервисами:
-    - Первый сервис: образ **[jupyter/scipy-notebook](https://hub.docker.com/r/jupyter/scipy-notebook)**
+    - Первый сервис notebook: образ **[jupyter/scipy-notebook](https://hub.docker.com/r/jupyter/scipy-notebook)**
 
-    - Второй сервис: образ **[python:3.9.13-slim](https://hub.docker.com/r/jupyter/scipy-notebook)**
+    - Второй сервис mlflow remote server: образ **[python:3.9.13-slim](https://hub.docker.com/r/jupyter/scipy-notebook)**
 
-- #### для развёртывания примера собрать и поднять контейнеры следующей коммандой: `docker compose --env-file notebook_remote.env up --build`
+- #### для развёртывания примера, собрать и поднять контейнеры следующей коммандой: 
+    - `docker compose --env-file notebook_remote.env up --build`
 
     - файл  `notebook_remote.env` с переменными среды для сборки
 
@@ -103,8 +104,43 @@
 
 #### `Docker compose`:  Mlflow remote server + jupyter/noteebok with Mlflow client + file-store postgres + artifact-store ftp-server
 
+В данном примере понадобиться:
 
-<
+- docker compose ,и четыре сервиса:
+    - Первый сервис notebook: образ **[jupyter/scipy-notebook](https://hub.docker.com/r/jupyter/scipy-notebook)**
+
+    - Второй сервис mlflow remote server: образ **[python:3.9.13-slim](https://hub.docker.com/r/jupyter/scipy-notebook)**
+
+    - Третий сервис postgres: образ **[postgres:alpine](https://hub.docker.com/r/jupyter/scipy-notebook)**
+
+    - Четвёртый сервис ftp remote server: образ **[stilliard/pure-ftpd:latest](https://hub.docker.com/r/jupyter/scipy-notebook)**
+
+- #### для развёртывания примера, собрать и поднять контейнеры следующей коммандой: 
+    - `docker compose --env-file remote_postgres_ftp.env -f docker-compose-sample4.yml up --build`
+
+    - файл  `remote_postgres_ftp.env` с переменными среды для сборки
+
+- #### Пример `myapp/sample_4.ipynb`
+
+- #### Пример `myapp/sample2_run_start.ipynb`
+
+- #### Пример `myapp/register.ipynb` с моделями из sklearn на iris
+
+- Команда для запуска удалённого сервера **Mlflow**
+  в качестве **бд** `postgres`, для записи прогонов,
+  в качестве хранилища артефактов **URI**  `ftp-server`
+> **CMD mlflow server \
+    --backend-store-uri postgresql://admin:secret@postgres:5432/mlflow \\
+    --default-artifact-root ftp://mlflow:mlflow_password@localhost/data \\
+    --host 0.0.0.0**
+
+> **Примечание:**
+> Необзодимо поднять клиент **Mlflow** на  стороне **jupyter/notebook** контейнера:
+> `mlflow ui     --backend-store-uri postgresql://admin:secret@postgres:5432/mlflow 
+    --default-artifact-root ftp://mlflow:mlflow_password@localhost/data 
+    --host 0.0.0.0`
+
+
 ![Local_ex_4!](src/images/example_4.png "Local_ex_4")
 
 

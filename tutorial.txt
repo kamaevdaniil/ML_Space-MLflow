@@ -45,3 +45,5 @@ lsof -i:5000
 kill $(lsof -t -i:5000)
 
 docker compose --env-file notebook_remote.env up --build для запуска 3 примера
+
+docker compose --env-file remote_postgres_ftp.env -f docker-compose-sample4.yml up --build для запуска 4 примера
