@@ -25,15 +25,15 @@ EXPOSE 5000
 RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
 
-RUN cat> /mlflow/mlruns.db
-USER $UNAME
+# RUN cat> /mlflow/mlruns.db
+USER root
 
 # RUN usermod -a -G users jovyan
 
 # file-store хранилище
 CMD mlflow server \
-    --backend-store-uri sqlite:///mlflow/mlruns.db \ 
-    --default-artifact-root notebook:///home/jovyan/app/mlruns\
+    --backend-store-uri sqlite:///mydb.sqlite \ 
+    --default-artifact-root file:///home/jovyan/app/mlruns\
     --host 0.0.0.0  
 
 # CMD mlflow server \
