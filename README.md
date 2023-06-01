@@ -1,6 +1,11 @@
 # ML Space Архитектура
 
-![Local_ex_1!](src/images/example_1_local.png "Local_ex_1")
+![Local_ex_1!](src/images/arh1.png "Local_ex_1")
+
+***
+# Oauth2-proxy
+
+![Local_ex_1!](src/images/Architecture_1.jpg "Local_ex_1")
 
 ***
 
