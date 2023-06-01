@@ -1,4 +1,12 @@
+# ML Space Архитектура
+
+![Local_ex_1!](src/images/example_1_local.png "Local_ex_1")
+
+***
+
 # Mlfow example: Tracking, Model, Model Registry, Serving
+
+
 
 ***
 
